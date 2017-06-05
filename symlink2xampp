@@ -1,0 +1,10 @@
+#!/bin/bash
+
+symlink2xampp()
+{
+    dir=$(pwd)
+    name=$(basename "$dir");
+    $(ln -s "$dir" "/cygdrive/c/xampp/htdocs/$name")
+}
+
+symlink2xampp;
