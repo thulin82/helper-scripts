@@ -1,4 +1,11 @@
 #!/bin/bash
+#title           :symlink2xampp
+#description     :This script will create a symlink in the htdocs folder to the place where the script is executed
+#author          :thulin82
+#date            :20170605
+#version         :0.1
+#usage           :navigate to the folder where you want a symlink to be pointed at, run symlink2xampp
+#notes           :
 
 symlink2xampp()
 {
