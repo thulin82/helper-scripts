@@ -114,7 +114,7 @@ function app-check
 function app-status
 {
     for dir in $FOLDERS; do
-        if [ -d "$dir" ]; then
+        if [ -d "$dir/.git" ]; then
             repo=$(basename "$dir");
             echo -e "${RED}$repo${NC}"
             cd $repo && git fetch && git status && cd .. || cd ..
