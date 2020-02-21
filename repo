@@ -96,12 +96,12 @@ function app-check
     for dir in $FOLDERS; do
         if [ -d "$dir" ]; then
             repo=$(basename "$dir");
-		    status="Not a git repo";
-			color="${RED}%s"
-		    if [ -d "$dir/.git" ]; then
-			    status="A git repository";
-				color="${GREEN}%s"
-		    fi
+            status="Not a git repo";
+            color="${RED}%s"
+            if [ -d "$dir/.git" ]; then
+                status="A git repository";
+                color="${GREEN}%s"
+            fi
             printf "%-20s $color${NC}\n" "$repo" "$status";
         fi
     done
@@ -116,7 +116,7 @@ function app-status
     for dir in $FOLDERS; do
         if [ -d "$dir/.git" ]; then
             repo=$(basename "$dir");
-            echo -e "${GREEN}$repo${NC}"
+            echo -e "${YELLOW}$repo${NC}"
             cd $repo && git fetch && git status -sb && cd .. || cd ..
         fi
     done
@@ -171,17 +171,17 @@ do
             version
             exit 0
         ;;
-		
-		check | status | pull | diff | default)
-		    command=$1
+
+        check | status | pull | diff | default)
+            command=$1
             shift
             app-$command $*
             exit 0
-		;;
+        ;;
 
         *)
-		    badUsage "Option/command not recognized"
-			exit 1
+            badUsage "Option/command not recognized"
+            exit 1
     esac
 done
 
