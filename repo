@@ -34,6 +34,7 @@ function usage
 "  check                  Check if the folders are local repos."
 "  status                 Run git status on every repo."
 "  pull                   Run git pull on every repo."
+"  remote                 Run git git remote get-url origin on every repo."
 "  diff [branch] [branch] Check diff between to local/remote branches."
 "  default [anything]     Default behaviour."
 ""
@@ -97,12 +98,13 @@ function app-check
         if [ -d "$dir" ]; then
             repo=$(basename "$dir");
             status="Not a git repo";
-            color="${RED}%s"
+            color="${RED}%-18s"
+            nocolor="${NC}%s"
             if [ -d "$dir/.git" ]; then
                 status="A git repository";
-                color="${GREEN}%s"
+                color="${GREEN}%-18s"
             fi
-            printf "%-20s $color${NC}\n" "$repo" "$status";
+            printf "$color $nocolor\n" "$status" "$repo";
         fi
     done
 }
@@ -137,8 +139,23 @@ function app-pull
     done
 }
 
+
 #
-# Function for checcking the commit differences between two branches (local or remote)
+# Function for running "git remote get-url origin" in folders
+#
+function app-remote
+{
+    for dir in $FOLDERS; do
+        if [ -d "$dir/.git" ]; then
+            repo=$(basename "$dir");
+            echo -en "${YELLOW}$repo:${NC} "
+            cd $repo && git remote get-url origin && cd .. || cd ..
+        fi
+    done
+}
+
+#
+# Function for checking the commit differences between two branches (local or remote)
 # $1: First branch
 # $2: Second branch
 #
@@ -172,7 +189,7 @@ do
             exit 0
         ;;
 
-        check | status | pull | diff | default)
+        check | status | pull | remote | diff | default)
             command=$1
             shift
             app-$command $*

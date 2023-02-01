@@ -1,4 +1,4 @@
-Bash Helper Scripts
+Helper Scripts
 ==================================
 
 *Work in progress*
@@ -9,4 +9,4 @@ Usage
 ----------------------------------
 
 
-© Markus Thulin 2017-
+Â© Markus Thulin 2017-
