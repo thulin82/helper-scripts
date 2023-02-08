@@ -34,7 +34,7 @@ function Get-Changes {
             if ($head -ne $origin) {
                 # There are changes to be fetched from origin
                 Write-Host "Pulling changes on branch " $branch -ForegroundColor blue
-                # git pull
+                git pull
             } else {
                 # Origin and local repository are in sync
                 Write-Host "Already up to date" -ForegroundColor green
